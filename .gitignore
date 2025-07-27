@@ -1,0 +1,36 @@
+# Root
+node_modules/
+.env
+.DS_Store
+*.log
+
+# TypeScript build files
+*.tsbuildinfo
+
+# Mac files
+Thumbs.db
+
+# Editors/OS
+.vscode/
+.idea/
+
+# npm
+package-lock.json
+yarn.lock
+
+# --- Backend ---
+/backend/node_modules/
+backend/.env
+backend/dist/
+backend/build/
+backend/*.tsbuildinfo
+
+# --- Frontend ---
+/frontend/node_modules/
+frontend/.env
+frontend/dist/
+frontend/build/
+frontend/.next/
+frontend/.cache/
+frontend/.turbo/
+
