@@ -4,14 +4,16 @@ import jwt from "jsonwebtoken";
 
 export const userMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const header  = req.headers["authorization"]
-    const decoded = jwt.verify(header as string, JWT_PASSWORD)
-    if (decoded) {
-        //@ts-ignore
+    if (!header) {
+        return res.status(401).json({ msg: "You are not logged in" })
+    }
+    try {
+        const decoded = jwt.verify(header as string, JWT_PASSWORD) as { id?: string }
+        if (!decoded || !decoded.id) throw new Error('invalid')
+        // @ts-ignore augment
         req.userId = decoded.id
         next()
-    } else {
-        res.status(401).json({
-            msg: "You are not logged in"
-        })
+    } catch {
+        return res.status(401).json({ msg: "Invalid token" })
     }
 }
